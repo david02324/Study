@@ -1,19 +1,15 @@
 import java.sql.*;
 
-public class PreparedStatement {
+public class SQLtest {
     public static void main(String[] args) throws SQLException {
         // 객체 생성
         Connection con = null;
-        java.sql.PreparedStatement st;
+        Statement st;
+        ResultSet rs;
         
         // 초기 쿼리
         String selectDB = "use testdb"; // DB 선택문
-        String getOneRow = "insert into notice(" +
-                "title," +
-                "writer_id," +
-                "content," +
-                "files" +
-                ") values(?,?,?,?)";
+        String getOneRow = "SELECT * FROM NOTICE"; // 하나의 row 가져오기
 
         // 접속 정보
         String URL = "jdbc:mysql://localhost:3305?useSSL=false"; // 서버 주소
@@ -36,30 +32,30 @@ public class PreparedStatement {
             System.err.println("연결 오류" + e.getMessage());
             e.printStackTrace();
         }
+            // statement 객체 지정
+            st = con.createStatement();
 
+            // DB 선택
+            rs = st.executeQuery(selectDB);
 
-        // DB 선택
-        st = con.prepareStatement(selectDB);
+            // row들 가져오기
+            rs = st.executeQuery(getOneRow);
 
-        st = con.prepareStatement(getOneRow);
-        String title="TEST2";
-        String writerId="DavidJang";
-        String content="hahaha";
-        String files="";
-        st = con.prepareStatement(getOneRow);
-        st.setString(1,title);
-        st.setString(2,writerId);
-        st.setString(3,content);
-        st.setString(4,files);
-
-        int result = st.executeUpdate();
-
-        System.out.println(result);
-
-
+            while(rs.next()) {
+                int id = rs.getInt("id");
+                String title = rs.getString("TITLE");
+                String writerId = rs.getString("writer_id");
+                String content = rs.getString("content");
+                Date regDate = rs.getDate("regDate");
+                int hit = rs.getInt("hit");
+                if(hit>=10)
+                System.out.printf("id :%d, title:%s, writerId:%s, regDate:%s," +
+                        "content:%s, hit:%d\n",id,title,writerId,regDate,content,hit);
+            }
         // 접속 종료
         try {
             if(con != null)
+                rs.close();
                 st.close();
                 con.close();
         } catch (SQLException e) {}

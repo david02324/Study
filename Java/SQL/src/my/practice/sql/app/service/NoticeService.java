@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CRUD {
+public class NoticeService {
     // 접속 정보
     private String URL = "jdbc:mysql://localhost:3305?useSSL=false"; // 서버 주소
     private String userName = "root"; //  접속자 id
