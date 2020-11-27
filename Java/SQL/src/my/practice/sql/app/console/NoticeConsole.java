@@ -16,10 +16,10 @@ public class NoticeConsole {
     }
 
     public void printNoticeList() throws SQLException {
-        List<Notice> list = service.getList();
+        List<Notice> list = service.getList(1);
 
         System.out.println("─────────────────────────────────");
-        System.out.printf("<공지사항> 총 %d게시글\n",4);
+        System.out.printf("<공지사항> 총 %d게시글\n",10);
         System.out.println("─────────────────────────────────");
         for(Notice n : list)
         System.out.printf("%d. %s / %s / %s\n",

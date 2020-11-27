@@ -14,15 +14,26 @@ public class NoticeService {
     private String password = "111111"; // 접속자 pw
     private String driver = "com.mysql.jdbc.Driver";
 
-    public List<Notice> getList() throws SQLException {
+    public List<Notice> getList(int page) throws SQLException {
+
+        int startRowNum = (page-1)*10;
+        int amount = 10;
+
         // 객체 생성
         Connection con = null;
         Statement st;
+        PreparedStatement pst;
         ResultSet rs;
 
         // 초기 쿼리
         String selectDB = "use testdb"; // DB 선택문
         String getOneRow = "SELECT * FROM NOTICE"; // 하나의 row 가져오기
+        String setVar = "SET @rownum:=0";
+        String getOnePage = "SELECT" +
+                "  @rownum:=@rownum+1 as ROWNUM," +
+                "  notice.* " +
+                "FROM notice " +
+                "limit ?,?";
 
         // JDBC 드라이버 로드
         try {
@@ -40,14 +51,18 @@ public class NoticeService {
             System.err.println("연결 오류" + e.getMessage());
             e.printStackTrace();
         }
-        // statement 객체 지정
+        // DB지정
         st = con.createStatement();
+        st.executeQuery(selectDB);
 
-        // DB 선택
-        rs = st.executeQuery(selectDB);
+        // 변수 선언
+        st.executeQuery(setVar);
 
-        // row들 가져오기
-        rs = st.executeQuery(getOneRow);
+        // 한 페이지 받아오기
+        pst = con.prepareStatement(getOnePage);
+        pst.setInt(1,startRowNum);
+        pst.setInt(2,amount);
+        rs = pst.executeQuery();
 
         List<Notice> list = new ArrayList<Notice>();
 
