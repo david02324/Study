@@ -14,6 +14,7 @@ public class NoticeService {
     private String password = "111111"; // 접속자 pw
     private String driver = "com.mysql.jdbc.Driver";
 
+
     public List<Notice> getList(int page) throws SQLException {
 
         int startRowNum = (page-1)*10;
@@ -27,7 +28,6 @@ public class NoticeService {
 
         // 초기 쿼리
         String selectDB = "use testdb"; // DB 선택문
-        String getOneRow = "SELECT * FROM NOTICE"; // 하나의 row 가져오기
         String setVar = "SET @rownum:=0";
         String getOnePage = "SELECT" +
                 "  @rownum:=@rownum+1 as ROWNUM," +
@@ -98,6 +98,124 @@ public class NoticeService {
         return list;
     }
 
+    public List<Notice> getListFromTitle(String searchTitle) throws  SQLException {
+
+        // 객체 생성
+        Connection con = null;
+        Statement st;
+        PreparedStatement pst;
+        ResultSet rs;
+
+        // 초기 쿼리
+        String selectDB = "use testdb"; // DB 선택문
+        String getRows = "SELECT * FROM NOTICE";
+
+        // JDBC 드라이버 로드
+        try {
+            Class.forName(driver);
+        } catch (ClassNotFoundException e) {
+            System.err.println("JDBC 드라이버를 로드하는데에 문제 발생" + e.getMessage());
+            e.printStackTrace();
+        }
+
+        // 접속
+        try {
+            con = DriverManager.getConnection(URL, userName, password);
+        } catch (SQLException e) {
+            System.err.println("연결 오류" + e.getMessage());
+            e.printStackTrace();
+        }
+
+        // DB지정
+        st = con.createStatement();
+        st.executeQuery(selectDB);
+
+
+        // row 받아오기
+        st = con.createStatement();
+        rs = st.executeQuery(getRows);
+
+        List<Notice> searchedList = new ArrayList<Notice>();
+
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            String title = rs.getString("TITLE");
+            String writerId = rs.getString("writer_id");
+            String content = rs.getString("content");
+            Date regDate = rs.getDate("regDate");
+            int hit = rs.getInt("hit");
+            String files = rs.getString("FILES");
+
+            if (title.equals(searchTitle)) {
+
+                Notice notice = new Notice(
+                        id,
+                        title,
+                        writerId,
+                        content,
+                        regDate,
+                        hit,
+                        files
+                );
+
+                searchedList.add(notice);
+            }
+        }
+        // 접속 종료
+        rs.close();
+        st.close();
+        con.close();
+        return searchedList;
+    }
+
+    public int getCount() throws SQLException {
+        int count = 0;
+        Connection con = null;
+        Statement st;
+        ResultSet rs;
+
+        // 초기 쿼리
+        String selectDB = "use testdb"; // DB 선택문
+
+        // 글 개수 받아오기
+        String getCount = "SELECT COUNT(ID) COUNT FROM NOTICE";
+
+
+        // JDBC 드라이버 로드
+        try {
+            Class.forName(driver);
+        } catch (ClassNotFoundException e) {
+            System.err.println("JDBC 드라이버를 로드하는데에 문제 발생" + e.getMessage());
+            e.printStackTrace();
+        }
+
+        // 접속
+        try {
+            con = DriverManager.getConnection(URL, userName, password);
+        } catch(SQLException e) {
+            System.err.println("연결 오류" + e.getMessage());
+            e.printStackTrace();
+        }
+
+        // DB지정
+        st = con.createStatement();
+        st.executeQuery(selectDB);
+
+        rs = st.executeQuery(getCount);
+        if(rs.next()) {
+            count = rs.getInt("COUNT");
+        }
+        // 접속 종료
+        try {
+            if(con != null)
+                rs.close();
+            st.close();
+            con.close();
+        } catch (SQLException e) {}
+
+        return count;
+    }
+
     public int Insert(Notice notice) throws SQLException {
         // 객체 생성
         Connection con = null;
@@ -124,7 +242,6 @@ public class NoticeService {
         // 접속
         try {
             con = DriverManager.getConnection(URL, userName, password);
-            System.out.println("연결 완료!");
         } catch(SQLException e) {
             System.err.println("연결 오류" + e.getMessage());
             e.printStackTrace();
@@ -179,7 +296,6 @@ public class NoticeService {
         // 접속
         try {
             con = DriverManager.getConnection(URL, userName, password);
-            System.out.println("연결 완료!");
         } catch(SQLException e) {
             System.err.println("연결 오류" + e.getMessage());
             e.printStackTrace();
@@ -231,7 +347,6 @@ public class NoticeService {
         // 접속
         try {
             con = DriverManager.getConnection(URL, userName, password);
-            System.out.println("연결 완료!");
         } catch (SQLException e) {
             System.err.println("연결 오류" + e.getMessage());
             e.printStackTrace();
