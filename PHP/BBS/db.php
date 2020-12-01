@@ -1,14 +1,15 @@
 <?php
-	session_start();
-	header('Content-Type: text/html; charset=utf-8'); // utf-8인코딩
+    session_start();
+    
+    // 한글 깨짐 방지를 위한 utf-8 인코딩
+	header('Content-Type: text/html; charset=utf-8');
 
-	// localhost = DB주소, web=DB계정아이디, 1234=DB계정비밀번호, post_board="DB이름"
 	$db = new mysqli("localhost","root","111111","bbs");
 	$db->set_charset("utf8");
 
-	function mq($sql)
+	function query($query)
 	{
 		global $db;
-		return $db->query($sql);
+		return $db->query($query);
 	}
 ?>
