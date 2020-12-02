@@ -20,7 +20,7 @@
 <div id="board_read">
 	<h2><?php echo $board['title']; ?></h2>
 		<div id="user_info">
-			<?php echo $board['name']; ?> <?php echo $board['date']; ?> 조회:<?php echo $board['hit']; ?>
+			<?php echo $board['name']; ?> <?php echo $board['date']; ?> 조회:<?php echo $board['hit']; ?> 추천수:<?php echo $board['thumbup']; ?>
 				<div id="bo_line"></div>
 			</div>
 			<div id="bo_content">
@@ -30,6 +30,7 @@
 	<div id="bo_ser">
 		<ul>
 			<li><a href="/">[목록으로]</a></li>
+			<li><a href="thumbup.php?idx=<?php echo $board['idx']; ?>">[추천]</a></li>
 			<li><a href="modify.php?idx=<?php echo $board['idx']; ?>">[수정]</a></li>
 			<li><a href="delete.php?idx=<?php echo $board['idx']; ?>">[삭제]</a></li>
 		</ul>

@@ -16,9 +16,9 @@
                 <th width="500">제목</th>
                 <th width="120">글쓴이</th>
                 <th width="100">작성일</th>
+                <th width="100">조회수</th>
                 <!-- 추천수 항목 추가 -->
                 <th width="100">추천수</th>
-                <th width="100">조회수</th>
             </tr>
         </thead>
         <?php
