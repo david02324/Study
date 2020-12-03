@@ -22,7 +22,9 @@
                         <textarea name="content" id="ucontent" placeholder="내용" required></textarea>
                     </div>
                     <div id="in_pw">
-                        <input type="password" name="pw" id="upw"  placeholder="비밀번호" required />  
+                        <input type="password" name="pw" id="upw"  placeholder="비밀번호" required />
+                    <div id="in_lock">
+                        <input type="checkbox" value="1" name="lockpost" />해당글을 잠급니다.
                     </div>
                     <div class="bt_se">
                         <button type="submit">글 작성</button>
