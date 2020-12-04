@@ -23,11 +23,17 @@
         </thead>
         <?php
         // board테이블에서 idx를 기준으로 내림차순해서 10개까지 표시
-          $sql = query("select * from board order by idx desc limit 0,10"); 
+          $sql = query("select * from board order by idx desc limit 0,10");
             while($board = $sql->fetch_array())
             {
               //title변수에 DB에서 가져온 title을 선택
               $title=$board["title"]; 
+
+              //댓글 수 넣기 위한 코드
+              $con_idx = $board["idx"];
+              $reply_count = query("SELECT COUNT(*) as cnt FROM reply where con_num=$con_idx");
+              $con_reply_count = $reply_count->fetch_array();
+              
               if(strlen($title)>30)
               { 
                 //title이 30을 넘어서면 ...표시
@@ -40,9 +46,9 @@
           <td width="500"><?php 
         $lockimg = "<img src='/BBS/img/lock.png' alt='lock' title='lock' with='20' height='20' />";
         if($board['lock_post']=="1")
-          { ?><a href='/BBS/ck_read.php?idx=<?php echo $board["idx"];?>'><?php echo $title, $lockimg;
+          { ?><a href='/BBS/ck_read.php?idx=<?php echo $board["idx"];?>'><?php echo $title."[".$con_reply_count["cnt"]."]", $lockimg;
             }else{  ?>
-          <a href="/BBS/read.php?idx=<?php echo $board["idx"];?>"><?php echo $title;}?></a></td>
+          <a href="/BBS/read.php?idx=<?php echo $board["idx"];?>"><?php echo $title."[".$con_reply_count["cnt"]."]";}?></a></td>
           <td width="120"><?php echo $board['name']?></td>
           <td width="100"><?php echo $board['date']?></td>
           <td width="100"><?php echo $board['hit']; ?></td>
