@@ -57,10 +57,19 @@
           <td width="70"><?php echo $board['idx']; ?></td>
           <td width="500"><?php 
         $lockimg = "<img src='/BBS/img/lock.png' alt='lock' title='lock' with='20' height='20' />";
+        $boardtime = $board['date']; //$boardtime변수에 board['date']값을 넣음
+        $timenow = date("Y-m-d"); //$timenow변수에 현재 시간 Y-M-D를 넣음
+
+        if($boardtime==$timenow){
+          $img = "<img src='/BBS/img/new.png' alt='new' title='new' />";
+        }else{
+          $img ="";
+        }
+
         if($board['lock_post']=="1")
-          { ?><a href='/BBS/ck_read.php?idx=<?php echo $board["idx"];?>'><?php echo $title."[".$rep_count["cnt"]."]", $lockimg;
+          { ?><a href='/BBS/ck_read.php?idx=<?php echo $board["idx"];?>'><?php echo $title."[".$rep_count["cnt"]."]", $lockimg , $img;
             }else{  ?>
-          <a href="/BBS/read.php?idx=<?php echo $board["idx"];?>"><?php echo $title."[".$rep_count["cnt"]."]";}?></a></td>
+          <a href="/BBS/read.php?idx=<?php echo $board["idx"];?>"><?php echo $title."[".$rep_count["cnt"]."]", $img;}?></a></td>
           <td width="120"><?php echo $board['name']?></td>
           <td width="100"><?php echo $board['date']?></td>
           <td width="100"><?php echo $board['hit']; ?></td>
