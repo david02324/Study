@@ -1,0 +1,9 @@
+﻿  vector.cpp
+C:\Users\12201788_장다윗\source\repos\Vector\vector.cpp(24,9): warning C4834: 'nodiscard' 특성이 포함된 함수의 반환 값을 버리는 중
+C:\Users\12201788_장다윗\source\repos\Vector\vector.cpp(26,4): warning C4834: 'nodiscard' 특성이 포함된 함수의 반환 값을 버리는 중
+C:\Users\12201788_장다윗\source\repos\Vector\vector.cpp(26,16): warning C4834: 'nodiscard' 특성이 포함된 함수의 반환 값을 버리는 중
+C:\Users\12201788_장다윗\source\repos\Vector\vector.cpp(28,4): warning C4834: 'nodiscard' 특성이 포함된 함수의 반환 값을 버리는 중
+C:\Users\12201788_장다윗\source\repos\Vector\vector.cpp(28,16): warning C4834: 'nodiscard' 특성이 포함된 함수의 반환 값을 버리는 중
+C:\Users\12201788_장다윗\source\repos\Vector\vector.cpp(34,10): warning C4834: 'nodiscard' 특성이 포함된 함수의 반환 값을 버리는 중
+C:\Users\12201788_장다윗\source\repos\Vector\vector.cpp(39,19): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  Vector.vcxproj -> C:\Users\12201788_장다윗\source\repos\Vector\Debug\Vector.exe
