@@ -1,11 +1,2 @@
-﻿  virtual.cpp
-C:\Users\12201788_장다윗\source\repos\Final_Exam_Practice\virtual.cpp(27,9): error C2259: 'Parent': 추상 클래스를 인스턴스화할 수 없습니다.
-C:\Users\12201788_장다윗\source\repos\Final_Exam_Practice\virtual.cpp(4): message : 'Parent' 선언을 참조하십시오.
-C:\Users\12201788_장다윗\source\repos\Final_Exam_Practice\virtual.cpp(27,9): message : 다음 멤버가 원인입니다.
-C:\Users\12201788_장다윗\source\repos\Final_Exam_Practice\virtual.cpp(27,9): message : 'void Parent::test(void)': abstract입니다.
-C:\Users\12201788_장다윗\source\repos\Final_Exam_Practice\virtual.cpp(12): message : 'Parent::test' 선언을 참조하십시오.
-C:\Users\12201788_장다윗\source\repos\Final_Exam_Practice\virtual.cpp(28,8): error C2259: 'Child': 추상 클래스를 인스턴스화할 수 없습니다.
-C:\Users\12201788_장다윗\source\repos\Final_Exam_Practice\virtual.cpp(15): message : 'Child' 선언을 참조하십시오.
-C:\Users\12201788_장다윗\source\repos\Final_Exam_Practice\virtual.cpp(28,8): message : 다음 멤버가 원인입니다.
-C:\Users\12201788_장다윗\source\repos\Final_Exam_Practice\virtual.cpp(28,8): message : 'void Parent::test(void)': abstract입니다.
-C:\Users\12201788_장다윗\source\repos\Final_Exam_Practice\virtual.cpp(12): message : 'Parent::test' 선언을 참조하십시오.
+﻿  operator overloading.cpp
+  Final_Exam_Practice.vcxproj -> C:\Users\12201788_장다윗\source\repos\Final_Exam_Practice\Debug\Final_Exam_Practice.exe
