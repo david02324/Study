@@ -142,6 +142,7 @@
     <ClCompile Include="copy constructor.cpp" />
     <ClCompile Include="Exception.cpp" />
     <ClCompile Include="operator overloading.cpp" />
+    <ClCompile Include="template.cpp" />
     <ClCompile Include="virtual.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
